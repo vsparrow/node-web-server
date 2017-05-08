@@ -1,0 +1,19 @@
+
+{{!--// new view inside views folder maintenence.hbs--}}
+{{!--// render when site in maintenence mode--}}
+{{!--// p1 give it a simple structure--}}
+{{!--// p2 render it inside a new paice of middleware--}}
+{{!--// define via app.use, inside just need res.render--}}
+{{!--// dont call next since we dont want to move on with request--}}
+<! DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Site Under Maintenance</title>
+    </head>
+    <body>
+        <h1>Sorry site under maintenence</h1>
+        <h1>Please check later</h1>
+     {{> footer}}
+    </body>
+</html>     

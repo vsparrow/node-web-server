@@ -30,6 +30,10 @@ app.use((req,res,next) => {
     next();
 });
 
+app.use((req,res,next)=>{
+    res.render("maintenance")
+})
+
 // handlebar helper -> ways to register functions to run to dynamically create output     
 // partial : functions you can run inside your handlebar template
 // must register it //name of helper first arg, function to run as second arg
@@ -85,3 +89,4 @@ app.listen(process.env.PORT, process.env.IP,()=>{
     console.log("Server is up")
 });
 // app.li
+
