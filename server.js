@@ -1,6 +1,13 @@
 //configure routes, pages, etc
 const express = require("express");
+const hbs = require("hbs");
+
 var app = express();
+
+//app.set allows set various express related config
+// keyvalue pair {what you want set : what you want use}
+// mkdir views : default dir express uses
+app.set("view engine", "hbs");
 app.use(express.static(__dirname + "/public")) //static takes the absolute path you want to serve up
 //__dirname gets passed to our file via a wrapper function
 //  it stores the path to your projects dir
@@ -20,7 +27,8 @@ app.get("/",(req,res)=>{
 
 
 app.get("/about",(req,res)=>{
-    res.send("About page")
+    // res.send("About page")
+    res.render("about.hbs");
 });
 
 app.get("/bad",(req,res)=>{
