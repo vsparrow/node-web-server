@@ -16,7 +16,7 @@ hbs.registerPartials(__dirname + "/views/partials")  //add support for partials
 //nodemon server.js -e js,hbs // tells nodemon to watch js and hbs if it wont do it by default
 
 app.set("view engine", "hbs");
-app.use(express.static(__dirname + "/public")) //static takes the absolute path you want to serve up
+
 //app.use is how you use middleware, it takes a function
 //next tells your express when middleware   is done
 //if we do something asyncronus, middle ware does not move on, only when it sees next()
@@ -30,10 +30,11 @@ app.use((req,res,next) => {
     next();
 });
 
-app.use((req,res,next)=>{
-    res.render("maintenance")
-})
+// app.use((req,res,next)=>{
+//     res.render("maintenance")
+// })
 
+app.use(express.static(__dirname + "/public")) //static takes the absolute path you want to serve up
 // handlebar helper -> ways to register functions to run to dynamically create output     
 // partial : functions you can run inside your handlebar template
 // must register it //name of helper first arg, function to run as second arg
