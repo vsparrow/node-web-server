@@ -1,6 +1,11 @@
 //configure routes, pages, etc
 const express = require("express");
 var app = express();
+app.use(express.static(__dirname + "/public")) //static takes the absolute path you want to serve up
+//__dirname gets passed to our file via a wrapper function
+//  it stores the path to your projects dir
+//what this does is that you can now store static html pages in a folder called "public"
+//and those pages will be server without having to create routes.
 
 // ***************************************************************************** ROUTES
 
@@ -25,5 +30,7 @@ app.get("/bad",(req,res)=>{
 })
 // ***************************************************************************** end ROUTES
  
-app.listen(process.env.PORT, process.env.IP);
+app.listen(process.env.PORT, process.env.IP,()=>{
+    console.log("Server is up")
+});
 // app.li
