@@ -15,20 +15,28 @@ app.use(express.static(__dirname + "/public")) //static takes the absolute path 
 //and those pages will be server without having to create routes.
 
 // ***************************************************************************** ROUTES
+//challange: render template when someone visits root
+//replace json data will res.render to home.hbs
+//inside home.hbs : new property welcomeMessage inside <p>
+//also using same peoepry as about uses right now.
 
 app.get("/",(req,res)=>{
     // res.send("Hello express!")
     // res.send("<h1>Hello express!</h1>")
-    res.send({
-       name: 'vsparrow',
-       likes: ["cats", "cars", "coffee"]
+    // res.send({ name: 'vsparrow',       likes: ["cats", "cars", "coffee"] });
+    res.render("home.hbs", 
+    {   
+        pageTitle : "HomePage", 
+        currentYear : new Date().getFullYear(), 
+        welcomeMessage : "Welcome To My Website"
     });
 })
 
 
 app.get("/about",(req,res)=>{
     // res.send("About page")
-    res.render("about.hbs");
+    res.render("about.hbs",
+    {pageTitle : "About Page", currentYear : new Date().getFullYear()}); //objects passed to about
 });
 
 app.get("/bad",(req,res)=>{
