@@ -7,8 +7,25 @@ var app = express();
 //app.set allows set various express related config
 // keyvalue pair {what you want set : what you want use}
 // mkdir views : default dir express uses
+
+hbs.registerPartials(__dirname + "/views/partials")  //add support for partials 
+//takes dir that you wnt to use for handlebar partial files. needs absolute dir
+//to add a partial in hbs file, ex footer, use this syntax  {{> footer}}
+// the footer partial lives in views/partials/footer.hbs
+//nodemon server.js -e js,hbs // tells nodemon to watch js and hbs if it wont do it by default
+
 app.set("view engine", "hbs");
 app.use(express.static(__dirname + "/public")) //static takes the absolute path you want to serve up
+
+// handlebar helper -> ways to register functions to run to dynamically create output     
+// partial : functions you can run inside your handlebar template
+// must register it //name of helper first arg, function to run as second arg
+// here if getCurrentYear is called example, in footer, return the year from the function
+hbs.registerHelper('getCurrentYear',()=>{
+    return new Date().getFullYear()
+})  
+//configure header.hbs and hbs helper getCurrentYear
+
 //__dirname gets passed to our file via a wrapper function
 //  it stores the path to your projects dir
 //what this does is that you can now store static html pages in a folder called "public"
@@ -27,7 +44,7 @@ app.get("/",(req,res)=>{
     res.render("home.hbs", 
     {   
         pageTitle : "HomePage", 
-        currentYear : new Date().getFullYear(), 
+        // currentYear : new Date().getFullYear(), //removed because create hbs.registerHelper
         welcomeMessage : "Welcome To My Website"
     });
 })
@@ -36,7 +53,9 @@ app.get("/",(req,res)=>{
 app.get("/about",(req,res)=>{
     // res.send("About page")
     res.render("about.hbs",
-    {pageTitle : "About Page", currentYear : new Date().getFullYear()}); //objects passed to about
+    {pageTitle : "About Page"
+    // , currentYear : new Date().getFullYear() //removed because create hbs.registerHelper
+    }); //objects passed to about
 });
 
 app.get("/bad",(req,res)=>{
