@@ -1,6 +1,7 @@
 //configure routes, pages, etc
 const express = require("express");
 const hbs = require("hbs");
+const fs = require("fs");
 
 var app = express();
 
@@ -16,6 +17,18 @@ hbs.registerPartials(__dirname + "/views/partials")  //add support for partials
 
 app.set("view engine", "hbs");
 app.use(express.static(__dirname + "/public")) //static takes the absolute path you want to serve up
+//app.use is how you use middleware, it takes a function
+//next tells your express when middleware   is done
+//if we do something asyncronus, middle ware does not move on, only when it sees next()
+//if you dont call next, your handlers for each request never fire, ie app freeze
+app.use((req,res,next) => {
+    var now = new Date().toString();
+    var log = `${now} : ${req.method} ${req.url}`
+    // console.log("Now is "+ now);
+    console.log(log);
+    fs.appendFile('server.log',log + '\n',(err)=>{if(err){console.log("cannot append server.log")}  });
+    next();
+});
 
 // handlebar helper -> ways to register functions to run to dynamically create output     
 // partial : functions you can run inside your handlebar template
