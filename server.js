@@ -84,6 +84,10 @@ app.get("/bad",(req,res)=>{
         errorMessage : "Cannot fulfill request"
     })
 })
+
+app.get("/projects", (req,res)=>{
+    res.render("projects.hbs",{pageTitle : "Projects Page"});
+})
 // ***************************************************************************** end ROUTES
  
 app.listen(process.env.PORT, process.env.IP,()=>{
